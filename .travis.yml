@@ -8,6 +8,8 @@ script:
 - bundle exec rspec -fd spec/
 deploy:
   provider: heroku
-  api_key: QZYWYGcoFQYx1buVMz/BPLQdOSfqkHn1XgunX1QqmGMJ+W8mLHpW9jFZYb0z+j3bGy3BCQzFOfSgnvY48GjVbFupU6ql7sZHowDJfZuc5a1kcgxQnQvONa0UrdoAvuLCizSAs35Oy9/sU2EaFAQQnVQwtD/Q6V1rrOsE7zGbl0s=
+  api_key:
+    secure: k9UYREVlFT4+HeI4Z5Xzd1/1qGZ2K+4o6FJZIO4R4C3dQDJMjeVrhvrhqnYibrPv9oV2ueOfEVe/AoyJlDbnHvn3bkKCD4ap7jCiLFm9ayzaYBj1oKvFRxj9leh6DlyxtYlahQ5/Wnw+QEdkg+eRKNf6tayyVRcGh65SNVZmLPw=
   app: shrouded-hamlet-1791
-  run: "rake db:migrate"
+  on:
+    repo: Augustus58/ratebeer
