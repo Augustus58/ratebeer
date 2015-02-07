@@ -1,10 +1,14 @@
 language: ruby
-
 rvm:
- - 2.2.0
-
+- 2.2.0
 script:
- - bundle exec rake db:migrate --trace				
- - RAILS_ENV=test bundle exec rake db:migrate --trace		
- - bundle exec rake db:test:prepare
- - bundle exec rspec -fd spec/	
+- bundle exec rake db:migrate --trace
+- RAILS_ENV=test bundle exec rake db:migrate --trace
+- bundle exec rake db:test:prepare
+- bundle exec rspec -fd spec/
+deploy:
+  provider: heroku
+  api_key:
+  secure: QZYWYGcoFQYx1buVMz/BPLQdOSfqkHn1XgunX1QqmGMJ+W8mLHpW9jFZYb0z+j3bGy3BCQzFOfSgnvY48GjVbFupU6ql7sZHowDJfZuc5a1kcgxQnQvONa0UrdoAvuLCizSAs35Oy9/sU2EaFAQQnVQwtD/Q6V1rrOsE7zGbl0s=
+  app: shrouded-hamlet-1791
+  run: "rake db:migrate"
