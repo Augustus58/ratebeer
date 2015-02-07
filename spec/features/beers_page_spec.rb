@@ -8,12 +8,14 @@ describe "Beers page" do
     expect(page).to have_content 'Number of beers: 0'   
   end
 
-  it "allows to add beers" do
+  it "allows to add beers when signed in" do
     @breweries = ["Koff", "Karjala", "Schlenkerla"]
     year = 1896
     @breweries.each do |brewery_name|
       FactoryGirl.create(:brewery, name: brewery_name, year: year += 1)
     end
+    FactoryGirl.create :user
+    sign_in(username:"Pekka", password:"Foobar1")
     visit beers_path
     click_link "New Beer"
     fill_in('beer_name', with:'Superolut')
@@ -32,6 +34,8 @@ describe "Beers page" do
     @breweries.each do |brewery_name|
       FactoryGirl.create(:brewery, name: brewery_name, year: year += 1)
     end
+    FactoryGirl.create :user
+    sign_in(username:"Pekka", password:"Foobar1")
     visit beers_path
     click_link "New Beer"
     fill_in('beer_name', with:'')
