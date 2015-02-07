@@ -24,6 +24,18 @@
 </ul>
 <% end %>
 
+<% if not @user.favorite_brewery.nil? %>
+<p>
+  Favorite brewery: <%= @user.favorite_brewery.name %>
+</p>
+<% end %>
+
+<% if not @user.favorite_style.nil? %>
+<p>
+  Favorite style: <%= @user.favorite_style %>
+</p>
+<% end %>
+
 <p>
   <% @user.beer_clubs.each do |bc| %>
   <%= link_to bc.name, bc %>
