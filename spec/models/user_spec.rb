@@ -12,15 +12,15 @@ def create_beers_with_ratings(*scores, user)
   end
 end
 
-def create_beer2_with_rating(score, user, brewery)
-  beer = FactoryGirl.create(:beer2, brewery:brewery)
+def create_beer2_with_rating(score, user, brewery, style)
+  beer = FactoryGirl.create(:beer2, brewery:brewery, style:style)
   FactoryGirl.create(:rating, score:score, beer:beer, user:user)
   beer
 end
 
-def create_beers2_with_ratings(*scores, user, brewery)
+def create_beers2_with_ratings(*scores, user, brewery, style)
   scores.each do |score|
-    create_beer2_with_rating(score, user, brewery)
+    create_beer2_with_rating(score, user, brewery, style)
   end
 end
 
@@ -54,6 +54,8 @@ describe User do
   describe "favorite style" do
     let(:user){FactoryGirl.create(:user) }
     let(:brewery){ FactoryGirl.create(:brewery2) }
+    let(:style){ FactoryGirl.create(:style) }
+    let(:style2){ FactoryGirl.create(:style2) }
     
     it "has method for determining one" do
       user.should respond_to :favorite_style
@@ -70,10 +72,11 @@ describe User do
     end
 
     it "is the one with highest rating average if several rated" do
-      create_beers_with_ratings(10, 20, 15, 7, 9, user)
-      create_beers2_with_ratings(11, 21, 16, 8, 10, user, brewery)
-      favorite_style = FactoryGirl.create(:beer2).style      
-      expect(user.favorite_style).to eq(favorite_style)
+      #Style.all.each { |style| style.destroy }
+      create_beers2_with_ratings(10, 20, 15, 7, 9, user, brewery, style)
+      create_beers2_with_ratings(11, 21, 16, 8, 10, user, brewery, style2)
+      #favorite_style = FactoryGirl.create(:beer2).style      
+      expect(user.favorite_style).to eq(style2)
     end
     
   end
@@ -82,6 +85,8 @@ describe User do
     let(:user){ FactoryGirl.create(:user) }
     let(:brewery){ FactoryGirl.create(:brewery) }
     let(:brewery2){ FactoryGirl.create(:brewery2) }
+    let(:style){ FactoryGirl.create(:style) }
+    let(:style2){ FactoryGirl.create(:style2) }
 
     it "has method for determining one" do
       user.should respond_to :favorite_brewery
@@ -98,8 +103,8 @@ describe User do
     end
 
     it "is the one with highest rating average if several rated" do
-      create_beers2_with_ratings(10, 11, 12, 13, user, brewery)
-      create_beers2_with_ratings(11, 12, 13, 14, user, brewery2)
+      create_beers2_with_ratings(10, 11, 12, 13, user, brewery, style)
+      create_beers2_with_ratings(11, 12, 13, 14, user, brewery2, style2)
       expect(user.favorite_brewery).to eq(brewery2)
     end
     

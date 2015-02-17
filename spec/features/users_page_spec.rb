@@ -13,15 +13,15 @@ def create_beers_with_ratings(*scores, user)
   end
 end
 
-def create_beer2_with_rating(score, user, brewery)
-  beer = FactoryGirl.create(:beer2, brewery:brewery)
+def create_beer2_with_rating(score, user, brewery, style)
+  beer = FactoryGirl.create(:beer2, brewery:brewery, style:style)
   FactoryGirl.create(:rating, score:score, beer:beer, user:user)
   beer
 end
 
-def create_beers2_with_ratings(*scores, user, brewery)
+def create_beers2_with_ratings(*scores, user, brewery, style)
   scores.each do |score|
-    create_beer2_with_rating(score, user, brewery)
+    create_beer2_with_rating(score, user, brewery, style)
   end
 end
 
@@ -29,6 +29,8 @@ describe "Users page" do
   let!(:user){FactoryGirl.create(:user) }
   let!(:user2){FactoryGirl.create(:user2) }
   let!(:brewery){ FactoryGirl.create(:brewery2) }
+  let(:style){ FactoryGirl.create(:style) }
+  let(:style2){ FactoryGirl.create(:style2) }
   
   it "should not have any ratings if there's none in the database" do
     visit users_path
@@ -67,11 +69,11 @@ describe "Users page" do
 
   it "shows favorite brewery and favorite style correctly" do
     create_beers_with_ratings(10, 20, 15, 7, 9, user)
-    create_beers2_with_ratings(11, 21, 16, 8, 10, user, brewery)
+    create_beers2_with_ratings(11, 21, 16, 8, 10, user, brewery, style2)
     visit users_path
     first(:link, 'Show').click
     expect(page).to have_content "Favorite brewery: #{user.favorite_brewery.name}"
-    expect(page).to have_content "Favorite style: #{user.favorite_style}"
+    expect(page).to have_content "Favorite style: #{user.favorite_style.name}"
   end
   
 end

@@ -32,12 +32,22 @@ FactoryGirl.define do
   factory :beer do
     name "anonymous"
     brewery
-    style "Lager"
+    style
   end
 
   factory :beer2, class: Beer do
     name "Superolut"
     brewery
-    style "Extra strong"
+    style
+  end
+
+  factory :style do
+    name "Lager"
+    description "Desc for Lager"
+  end
+
+  factory :style2, class: Style do
+    name "American Blonde Ale"
+    description "Desc for American Blonde Ale"
   end
 end
