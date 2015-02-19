@@ -32,7 +32,7 @@ describe "Beers page" do
   end
 
   it "works right if bad beer name is given and doesn't save anything to database" do
-    Style.all.each { |style| style.destroy }
+    style.all.each { |style| style.destroy }
     @breweries = ["Koff", "Karjala", "Schlenkerla"]
     year = 1896
     @breweries.each do |brewery_name|

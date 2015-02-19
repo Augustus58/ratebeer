@@ -24,6 +24,6 @@
     <%= f.select :brewery_id, options_for_select(@breweries.map { |brewery| [brewery.name, brewery.id] }) %>
   </div>
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit class:"btn btn-primary" %>
   </div>
 <% end %>

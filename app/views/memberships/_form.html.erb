@@ -12,6 +12,6 @@
 <% end %>
 
 <%= f.select :beer_club_id, options_for_select(@beer_clubs.map { |beer_club| [beer_club.to_s, beer_club.id] }) %>
-<%= f.submit %>
+<%= f.submit class:"btn btn-primary" %>
 
 <% end %>  
