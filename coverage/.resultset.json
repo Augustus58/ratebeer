@@ -65,7 +65,7 @@
       "/Users/akusilvennoinen/Desktop/WPRR/ratebeer/ratebeer/lib/rating_average.rb": [
         1,
         1,
-        79,
+        81,
         69,
         null,
         null
@@ -150,7 +150,7 @@
         1,
         null,
         1,
-        55,
+        57,
         2,
         null,
         null
@@ -710,6 +710,6 @@
         null
       ]
     },
-    "timestamp": 1424550742
+    "timestamp": 1424551260
   }
 }
