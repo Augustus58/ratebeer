@@ -18,14 +18,14 @@ describe "Ratings page" do
   
   it "should not have any before been created" do
     visit ratings_path
-    expect(page).to have_content 'List of ratings'
+    expect(page).to have_content 'Rating statistics'
     expect(page).to have_content 'Number of ratings: 0'   
   end
 
   it "should show all existing ratings and number of these" do
     create_beers_with_ratings(10, 20, 15, user)
     visit ratings_path
-    expect(page).to have_content 'List of ratings'
+    expect(page).to have_content 'Rating statistics'
     expect(page).to have_content 'Number of ratings: 3'
     Rating.all.each do |rating|
       expect(page).to have_content "#{rating.beer.name} #{rating.score} #{rating.user.username}"

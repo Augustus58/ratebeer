@@ -34,7 +34,7 @@ describe "Users page" do
   
   it "should not have any ratings if there's none in the database" do
     visit users_path
-    first(:link, 'Show').click
+    click_link(user.username)
     expect(page).to have_content "#{user.username}"
     expect(page).to have_content 'no ratings yet!'
   end
@@ -43,7 +43,7 @@ describe "Users page" do
     create_beers_with_ratings(10, 20, 15, user)
     create_beers_with_ratings(11, 21, 16, user2)
     visit users_path
-    first(:link, 'Show').click
+    click_link(user.username)
     expect(page).to have_content user.username
     expect(page).to have_content 'Has made 3 ratings, average 15.0'
     user.ratings.each do |rating|
@@ -59,7 +59,8 @@ describe "Users page" do
     create_beers_with_ratings(11, 21, 16, user2)
     sign_in(username:"Pekka", password:"Foobar1")
     visit users_path
-    first(:link, 'Show').click
+    first(:link, user.username).click
+    click_link('my page')
     expect(user.ratings.count).to eq(3)
     expect(Rating.all.count).to eq(6)
     first(:link, 'delete').click
@@ -71,7 +72,7 @@ describe "Users page" do
     create_beers_with_ratings(10, 20, 15, 7, 9, user)
     create_beers2_with_ratings(11, 21, 16, 8, 10, user, brewery, style2)
     visit users_path
-    first(:link, 'Show').click
+    click_link(user.username)
     expect(page).to have_content "Favorite brewery: #{user.favorite_brewery.name}"
     expect(page).to have_content "Favorite style: #{user.favorite_style.name}"
   end

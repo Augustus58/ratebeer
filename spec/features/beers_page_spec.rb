@@ -20,7 +20,7 @@ describe "Beers page" do
     FactoryGirl.create :user
     sign_in(username:"Pekka", password:"Foobar1")
     visit beers_path
-    click_link "New Beer"
+    click_button "New Beer"
     fill_in('beer_name', with:'Superolut')
     select('Lager', from:'beer[style_id]')
     select('Schlenkerla', from: 'beer[brewery_id]')
@@ -32,7 +32,7 @@ describe "Beers page" do
   end
 
   it "works right if bad beer name is given and doesn't save anything to database" do
-    style.all.each { |style| style.destroy }
+    Style.all.each { |style| style.destroy }
     @breweries = ["Koff", "Karjala", "Schlenkerla"]
     year = 1896
     @breweries.each do |brewery_name|
@@ -43,7 +43,7 @@ describe "Beers page" do
     FactoryGirl.create :user
     sign_in(username:"Pekka", password:"Foobar1")
     visit beers_path
-    click_link "New Beer"
+    click_button "New Beer"
     fill_in('beer_name', with:'')
     select('Lager', from:'beer[style_id]')
     select('Schlenkerla', from: 'beer[brewery_id]')
