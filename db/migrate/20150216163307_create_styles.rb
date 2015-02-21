@@ -17,7 +17,7 @@ class CreateStyles < ActiveRecord::Migration
     end
 
     Beer.all.each do |b|
-      b.update_attribute :style_id, (Style.find_by name:b.old_style).id 
+      b.update_attribute :style_id, Style.find_by(name:b.old_style).id 
     end
     
     change_table :beers do |t|
