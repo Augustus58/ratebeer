@@ -1,9 +1,24 @@
-<h2>List of ratings</h2>
+<h2>Rating statistics</h2>
 
-<p> Number of ratings: <%= @ratings.count %> </p>
+<div class="row">
+  <div class="col-md-4">
+    <h3>Best beers</h3>
+    <%= render 'statistics_list', objects: @top_beers %>
+  </div>
+  <div class="col-md-4">
+    <h3>Best breweries</h3>
+    <%= render 'statistics_list', objects: @top_breweries %>
+  </div>
+  <div class="col-md-4">
+    <h3>Best styles</h3>
+    <%= render 'statistics_list', objects: @top_styles %>
+  </div>
+</div>
 
-<ul class="list-group">
-  <% @ratings.each do |rating| %>
-  <li class="list-group-item"> <%= rating %> <%= link_to rating.user.username, rating.user %> </li>
-  <% end %>
-</ul>
+<h3>Most active users</h3>
+<%= render 'most_active_users_list', users: @most_active_users %>
+
+<h3>Recent ratings</h3>
+
+<%= render 'recent_ratings_list', ratings: @recent_ratings %>
+

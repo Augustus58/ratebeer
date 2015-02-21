@@ -1,0 +1,7 @@
+<ul>
+  <% ratings.each do |rating| %>
+  <li>
+    <%= "#{rating.beer.name} #{rating.score} #{rating.user.username}" %>
+  </li>
+  <% end %>
+</ul>

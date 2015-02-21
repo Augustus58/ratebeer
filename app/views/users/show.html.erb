@@ -6,7 +6,7 @@
   <% if @user.ratings.empty? %>
   no ratings yet!
   <% else %>
-  Has made <%= pluralize(@user.ratings.count, 'rating') %>, average <%= @user.average_rating %> 
+  Has made <%= pluralize(@user.ratings.count, 'rating') %>, average <%= round(@user.average_rating) %>
   <% end %>
 </p>
 
@@ -43,7 +43,5 @@
 </p>
 
 <% if @user == current_user %>
-<%= link_to 'Edit', edit_user_path(@user) %> |
-<%= link_to 'Destroy', @user, method: :delete, data: { confirm: 'Are you sure?' } %> |
+<%= edit_and_destroy_buttons(@user) %>
 <% end %>
-<%= link_to 'Back', users_path %>
