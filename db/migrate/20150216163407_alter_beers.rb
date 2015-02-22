@@ -8,7 +8,7 @@ class AlterBeers < ActiveRecord::Migration
       t.rename :style, :old_style
       t.integer :style_id
     end
-    byebug
+    
     Beer.all.each do |b|
       b.update_attribute("style_id", Style.find_by(name: b.old_style).id) 
     end
