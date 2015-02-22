@@ -13,4 +13,5 @@ deploy:
   app: shrouded-hamlet-1791
   on:
     repo: Augustus58/ratebeer
+  run: "rake db:schema:dump"	  
   run: "rake db:migrate"
