@@ -10,7 +10,9 @@ class SessionsController < ApplicationController
     if user.nil?
       redirect_to :back, notice: "User #{params[:username]} does not exist!"
     else
-      if user && user.authenticate(params[:password])
+      if user.froze
+        redirect_to :back, notice: "Your account is frozen, please contact admin"
+      elsif user && user.authenticate(params[:password])
         session[:user_id] = user.id
         redirect_to user, notice: "Welcome back!"
       else
@@ -18,7 +20,7 @@ class SessionsController < ApplicationController
       end
     end
   end
-
+  
   def destroy
     # nollataan sessio
     session[:user_id] = nil

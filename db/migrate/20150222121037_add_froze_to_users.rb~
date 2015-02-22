@@ -1,0 +1,9 @@
+class AddFrozeToUsers < ActiveRecord::Migration
+  def change
+    add_column :users, :froze, :boolean
+  end
+
+  User.all.each do |u|
+      u.update_attribute :froze, false
+  end
+end

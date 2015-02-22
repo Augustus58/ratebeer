@@ -5,9 +5,11 @@ Rails.application.routes.draw do
 
   resources :beer_clubs
 
-  resources :users
+  resources :users do
+    post 'toggle_froze', on: :member
+  end
 
-  resources :beers
+  resources :beers 
   
   resources :breweries do
     post 'toggle_activity', on: :member

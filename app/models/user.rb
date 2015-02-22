@@ -22,14 +22,19 @@ class User < ActiveRecord::Base
 
   def favorite_style
     return nil if ratings.empty?
-    find_highest_rating_average(calculate_averages(find_ratings_by_styles))
+    favorite :style
   end
 
   def favorite_brewery
     return nil if ratings.empty?
-    find_highest_rating_average(calculate_averages(find_ratings_by_breweries))
+    favorite :brewery
   end
-  
+
+  def favorite(category)
+    return nil if ratings.empty?
+    find_highest_rating_average(calculate_averages(find_ratings_by category))
+  end
+
   def find_highest_rating_average (averages)
     fs = nil
     max = 0
@@ -42,14 +47,10 @@ class User < ActiveRecord::Base
     fs
   end
   
-  def find_ratings_by_styles
-    ratings.all.group_by { |r| r.beer.style }
+  def find_ratings_by(category)
+    ratings.all.group_by { |r| r.beer.send(category) }
   end
 
-  def find_ratings_by_breweries
-    ratings.all.group_by { |r| r.beer.brewery }
-  end
-  
   def calculate_averages h
     averages = Hash.new
     h.each { |key, value| averages[key] = (value.map { |r| r.score }.sum / value.count.to_f).round(2) }
