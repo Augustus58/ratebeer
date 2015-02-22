@@ -12,6 +12,5 @@ deploy:
     secure: k9UYREVlFT4+HeI4Z5Xzd1/1qGZ2K+4o6FJZIO4R4C3dQDJMjeVrhvrhqnYibrPv9oV2ueOfEVe/AoyJlDbnHvn3bkKCD4ap7jCiLFm9ayzaYBj1oKvFRxj9leh6DlyxtYlahQ5/Wnw+QEdkg+eRKNf6tayyVRcGh65SNVZmLPw=
   app: shrouded-hamlet-1791
   on:
-    repo: Augustus58/ratebeer
-  run: "rake db:schema:dump"	  
+    repo: Augustus58/ratebeer	  
   run: "rake db:migrate"
