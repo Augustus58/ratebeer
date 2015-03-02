@@ -27,6 +27,8 @@ Rails.application.routes.draw do
   get 'signin', to: 'sessions#new'
   delete 'signout', to: 'sessions#destroy'
 
+  get 'auth/:provider/callback', to: 'sessions#create_oauth'
+
   resources :places, only:[:index, :show]
   post 'places', to:'places#search'
   

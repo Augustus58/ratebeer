@@ -1,10 +1,22 @@
 <p id="notice"><%= notice %></p>
 
+<div style="border-style: solid;">
+  beerlist-name: <%= ActionController::Base.new.fragment_exist?( 'beerlist-name' ) %>
+  <br>
+  beerlist-style: <%= ActionController::Base.new.fragment_exist?( 'beerlist-style' ) %>
+  <br>
+  beerlist-brewery: <%= ActionController::Base.new.fragment_exist?( 'beerlist-brewery' ) %>
+  <br>
+  current: <%= "beerlist-#{@order}" %>
+</div>
+
 <h1>Listing Beers</h1>
 
 <p>
 Number of beers: <%= Beer.all.count%>
 </p>
+
+<% cache "beerlist-#{@order}", skip_digest: true do %>
 
 <table class="table table-hover">
   <thead>
@@ -25,6 +37,8 @@ Number of beers: <%= Beer.all.count%>
     <% end %>
   </tbody>
 </table>
+
+<% end %>
 
 <br>
 
