@@ -9,11 +9,14 @@ Rails.application.routes.draw do
     post 'toggle_froze', on: :member
   end
 
-  resources :beers 
+  resources :beers
+  get 'beerlist', to:'beers#list'
+  get 'ngbeerlist', to:'beers#nglist'
   
   resources :breweries do
     post 'toggle_activity', on: :member
   end
+  get 'brewerieslist', to:'breweries#list'
   
   root 'breweries#index'
   

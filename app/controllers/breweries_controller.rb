@@ -1,16 +1,48 @@
 class BreweriesController < ApplicationController
   before_action :set_brewery, only: [:show, :edit, :update, :destroy]
-  before_action :ensure_that_signed_in, except: [:index, :show]
+  before_action :ensure_that_signed_in, except: [:index, :show, :list]
   before_action :ensure_that_admin, only: [:destroy]
     
   # GET /breweries
   # GET /breweries.json
+  def list
+  end
+  
   def index
     @breweries = Brewery.all
     @active_breweries = Brewery.active
     @retired_breweries = Brewery.retired
-  end
+    
+    order = params[:order] || 'name'
 
+    if order == 'name'
+      if session[:last_breweries_ordering] == 'name_asc'
+        active = @active_breweries.sort_by{ |b| b.name }.reverse
+        retired = @retired_breweries.sort_by{ |b| b.name }.reverse
+        session[:last_breweries_ordering] = 'name_desc'
+      else
+        active = @active_breweries.sort_by{ |b| b.name }
+        retired = @retired_breweries.sort_by{ |b| b.name }
+        session[:last_breweries_ordering] = 'name_asc'
+      end
+    elsif order == 'year'
+      if session[:last_breweries_ordering] == 'year_asc'
+        active = @active_breweries.sort_by{ |b| b.year }.reverse
+        retired = @retired_breweries.sort_by{ |b| b.year }.reverse
+        session[:last_breweries_ordering] = 'year_desc'
+      else
+        active = @active_breweries.sort_by{ |b| b.year }
+        retired = @retired_breweries.sort_by{ |b| b.year }
+        session[:last_breweries_ordering] = 'year_asc'
+      end
+    else
+      active = @active_breweries.sort_by{ |b| b.name }
+      retired = @retired_breweries.sort_by{ |b| b.name } 
+    end
+    @active_breweries = active
+    @retired_breweries = retired
+  end
+  
   # GET /breweries/1
   # GET /breweries/1.json
   def show
