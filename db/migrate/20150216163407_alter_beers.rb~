@@ -1,4 +1,0 @@
-class AlterBeers < ActiveRecord::Migration
-  def change
-  end
-end
